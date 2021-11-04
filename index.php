@@ -43,8 +43,14 @@
 				case 'produtos':
 					include('./pages/produtos/produtos.php');
 					break;
+				case 'cadastrar_produto':
+					include('./pages/produtos/cadastrar.html');
+					break;
 				case 'ofertas':
 					include('./pages/ofertas/ofertas.php');
+					break;
+				case 'cadastrar_ofertas':
+					include('./pages/ofertas/cadastrar.php');
 					break;
 				case 'lista':
 					include('./pages/lista.php');
