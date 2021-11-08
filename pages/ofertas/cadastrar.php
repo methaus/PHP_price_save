@@ -4,7 +4,7 @@
 		<input type="hidden" name="operacao" value="cadastrar">
 		<div class="input-group">
 			<label class="input-group-text" for="produto">Produto</label>
-			<select name="produtos_id_produto" id="produto" class="form-control w-50 is-invalid" required aria-describedby="produtoinfo">
+			<select name="produtos_id_produto" id="produto" class="form-control is-invalid w-25" required aria-describedby="produtoinfo">
 				<option selected disabled>Escolha o Produto:</option>
 				<?php
 					$res = $conex->query("SELECT * FROM produtos") or die($conex->error);
@@ -23,7 +23,7 @@
 				?>
 			</select>
 			<label class="input-group-text" for="preco">Preco R$</label>
-			<input type="number" name="preco_oferta" class="form-control is-invalid" value="0.00" min="0.01" step="0.01" required>
+			<input type="number" name="preco_oferta" class="form-control is-invalid" value="0.00" min="0.00" step="0.01" required>
 			<small id="produtoinfo" class="invalid-feedback">Todos os campos são obrigatórios, exceto o comentário.</small>
 		</div>
 		<div class="input-group mt-3">
@@ -41,7 +41,7 @@
 						}
 					} else {
 						echo "
-				<option disabled>Nenhum produto cadastrado</option>
+				<option disabled>Nenhum local cadastrado</option>
 						";
 					}
 				?>

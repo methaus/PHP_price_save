@@ -3,13 +3,21 @@
 	<h2 class="fs-5">&nbsp;- Cadastre os lugares que pretende comprar!</h2>
 	<hr>
 	<?php
-		switch (@$_POST['operacao']) {
+		switch (@$_REQUEST['operacao']) {
 			case 'cadastrar':
 				$res = $conex->query("INSERT INTO mercados (nome_mercado, local_mercado, site_mercado) VALUES ('{$_POST['nome_mercado']}', '{$_POST['local_mercado']}', '{$_POST['site_mercado']}')") or die($conex->error);
 				if ($res == true) {
 					echo "<script>alert('Local cadastrado com sucesso!');</script>";
 				} else {
 					echo "<script>alert('ERRO - Não foi possível cadastrar local!');</script>";
+				}
+				break;
+			case 'excluir':
+				$res = $conex->query("DELETE mercados, ofertas FROM mercados INNER JOIN ofertas ON ofertas.mercados_id_mercado = mercados.id_mercado WHERE mercados.id_mercado = {$_GET['id_mercado']}") or die($conex->error);
+				if ($res == true) {
+					echo "<script>alert('Excluiu local com sucesso!'); location.href='?page=mercados';</script>";
+				} else {
+					echo "<script>alert('Não foi possível excluir esse local!'); location.href='?page=mercados';</script>";
 				}
 				break;
 		}
@@ -22,7 +30,8 @@
 			<tr>
 				<th scope='col' class='fs-5'>Nome</th>
 				<th scope='col' class='fs-5'>Local</th>
-				<th scope='col' class='fs-5'>Site (contato)</th>
+				<th scope='col' class='fs-5'>Site/contato</th>
+				<th scope='col' class='fs-5 text-center'>Ações</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,18 +43,37 @@
 				<td><p class='mt-1 mb-0 fs-5'>{$row->nome_mercado}</p></td>
 				<td><p class='mt-1 mb-0 fs-5'>{$row->local_mercado}</p></td>
 				<td><p class='mt-1 mb-0 fs-5'>{$row->site_mercado}</p></td>
+				<td class='text-center'>
+					<button 
+						class='btn btn-success'
+						onclick='location.href='?page=editar_mercado&id_mercado={$row->id_mercado}'
+					>
+						Editar
+					</button>
+					<button 
+						class='btn btn-danger'
+						onclick=
+							'if (confirm(\"Tem certeza que deseja excluir?\\nExcluindo o local você também excluirá os seus preços!\")) {
+								location.href=\"?page=mercados&operacao=excluir&id_mercado={$row->id_mercado}\"
+							} else {
+								false
+							}'
+					>
+						Excluir
+					</button>
+				</td>
 			</tr>
 				";
 			}
 			echo "
 			<tr>
-				<td colspan='3'><p class='mt-1 mb-0'>Para cadastrar mais locais clique <a href='?page=cadastrar_mercado'>aqui</a></p></td>
+				<td colspan='4'><p class='mt-1 mb-0'>Para cadastrar mais locais clique <a href='?page=cadastrar_mercado'>aqui</a></p></td>
 			</tr>
 			";
 		} else {
 			echo "
 			<tr>
-				<td colspan='3'><p class='mt-1 mb-0'>Você não tem nenhum local cadastrado, para cadastrar clique <a href='?page=cadastrar_mercado'>aqui</a></p></td>
+				<td colspan='4'><p class='mt-1 mb-0'>Você não tem nenhum local cadastrado, para cadastrar clique <a href='?page=cadastrar_mercado'>aqui</a></p></td>
 			</tr>
 			";
 		}
