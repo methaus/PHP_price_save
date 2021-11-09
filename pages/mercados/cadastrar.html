@@ -1,5 +1,5 @@
 <div class="w-50 container shadow-lg mt-4 pb-3 rounded">
-	<h1 class="text-center pt-3">Cadastrar mercado</h1>
+	<h1 class="text-center pt-3">Cadastrar lugar</h1>
 	<form class="form-row mx-auto my-3 px-4" method="POST" action="?page=mercados" onsubmit="return confirm('Confirmar cadastro?')">
 		<input type="hidden" name="operacao" value="cadastrar">
 		<div class="form-group">
@@ -9,7 +9,7 @@
 				<small id="nomeinfo" class="invalid-feedback">Por favor, não deixe esse campo em branco.</small>
 			</div>
 			<div class="input-group mt-3">
-				<label class="input-group-text" for="endereco">Local</label>
+				<label class="input-group-text" for="endereco">Endereço</label>
 				<input type="text" class="form-control" id="endereco" placeholder="Endereço, referência do lugar ou região. Fica perto de onde?" name="local_mercado">
 			</div>
 			<div class="input-group mt-3">
@@ -17,6 +17,9 @@
 				<input type="text" class="form-control" id="site" placeholder="Telefone? Site?" name="site_mercado">
 			</div>
 		</div>
-		<button class="btn btn-success w-50 text-center mt-3">Cadastrar</button>
+		<div class="d-flex">
+			<button class="btn btn-success w-50 text-center mt-3 mx-1">Cadastrar</button>
+			<a onclick="if (confirm('Abandonar cadastro?')) location.href='?page=mercados'" class="btn btn-secondary w-50 text-center mt-3 mx-1">Voltar</a>
+		<div>
 	</form>
 </div>

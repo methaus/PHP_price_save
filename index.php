@@ -44,7 +44,7 @@
 					include('./pages/mercados/cadastrar.html');
 					break;
 				case 'editar_mercado':
-					include('./pages/mercados/editar.html');
+					include('./pages/mercados/editar.php');
 					break;
 				case 'produtos':
 					include('./pages/produtos/produtos.php');
@@ -52,11 +52,17 @@
 				case 'cadastrar_produto':
 					include('./pages/produtos/cadastrar.html');
 					break;
+				case 'editar_produto':
+					include('./pages/produtos/editar.php');
+					break;
 				case 'ofertas':
 					include('./pages/ofertas/ofertas.php');
 					break;
 				case 'cadastrar_ofertas':
 					include('./pages/ofertas/cadastrar.php');
+					break;
+				case 'editar_oferta':
+					include('./pages/ofertas/editar.php');
 					break;
 				case 'lista':
 					include('./pages/lista.php');

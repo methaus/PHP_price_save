@@ -49,6 +49,9 @@
 		</div>
 		<label for="cometario" class="mt-3 mb-1">Comentario:</label>
       <textarea class="form-control" id="comentario" placeholder="Escreva a marca, até que dia dura a promoção, a opção caso não encontre...&#10;Maximo 400 caracteres!" maxlength="400" rows="6" style="resize: none;" name="comentario_oferta"></textarea>
-		<button class="btn btn-success w-50 text-center mt-3">Guardar oferta</button>
+      <div class="d-flex">
+			<button class="btn btn-success w-50 text-center mt-3 mx-1">Guardar oferta</button>
+			<a onclick="if (confirm('Abandonar cadastro?')) location.href='?page=ofertas'" class="btn btn-secondary w-50 text-center mt-3 mx-1">Voltar</a>
+		<div>
 	</form>
 </div>

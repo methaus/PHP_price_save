@@ -12,12 +12,32 @@
 					echo "<script>alert('ERRO - Não foi possível adicionar item!');</script>";
 				}
 				break;
-			case 'excluir':
-				$res = $conex->query("DELETE produtos, ofertas FROM produtos INNER JOIN ofertas ON ofertas.produtos_id_produto = produtos.id_produto WHERE produtos.id_produto = {$_GET['id_produto']}") or die($conex->error);
+			case 'editar':
+				$res = $conex->query("UPDATE produtos 
+					SET nome_produto = '{$_POST['nome_produto']}', qtd_produto = '{$_POST['qtd_produto']}' 
+					WHERE id_produto = {$_POST['id_produto']}") or die($conex->error);
 				if ($res == true) {
-					echo "<script>alert('Excluiu produto com sucesso!'); location.href='?page=produtos';</script>";
+					echo "<script>alert('Item editado com sucesso!');</script>";
 				} else {
-					echo "<script>alert('Não foi possível excluir esse produto!'); location.href='?page=produtos';</script>";
+					echo "<script>alert('ERRO - Não foi possível editar esse item!');</script>";
+				}
+				break;
+			case 'excluir':
+				$res = $conex->query("SELECT produtos_id_produto FROM ofertas WHERE produtos_id_produto = {$_GET['id_produto']}");
+				if ($res->fetch_assoc() == null) {
+					$res = $conex->query("DELETE FROM produtos WHERE id_produto = {$_GET['id_produto']}") or die($conex->error);
+					if ($res == true) {
+						echo "<script>alert('Item excluido com sucesso!'); location.href='?page=produtos';</script>";
+					} else {
+						echo "<script>alert('Não foi possível excluir esse item!'); location.href='?page=produtos';</script>";
+					}
+				} else {
+					$res = $conex->query("DELETE produtos, ofertas FROM produtos INNER JOIN ofertas WHERE produtos.id_produto = {$_GET['id_produto']} AND ofertas.produtos_id_produto = {$_GET['id_produto']}") or die($conex->error);
+					if ($res == true) {
+						echo "<script>alert('Item excluido com sucesso!'); location.href='?page=produtos';</script>";
+					} else {
+						echo "<script>alert('Não foi possível excluir esse item!'); location.href='?page=produtos';</script>";
+					}
 				}
 				break;
 		}
@@ -44,7 +64,7 @@
 				<td class='text-center'>
 					<button 
 						class='btn btn-success'
-						onclick='location.href='?page=editar_produto&id_produto={$row->id_produto}'
+						onclick='location.href=\"?page=editar_produto&id_produto={$row->id_produto}\"'
 					>
 						Editar
 					</button>

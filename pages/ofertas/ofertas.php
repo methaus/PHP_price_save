@@ -17,8 +17,16 @@
 					echo "<script>alert('ERRO - Um produto só pode ter um preço em cada mercado!');</script>";
 				}
 				break;
+			case 'editar':
+				$res = $conex->query("UPDATE ofertas SET preco_oferta = {$_POST['preco_oferta']}, comentario_oferta = '{$_POST['comentario_oferta']}' WHERE mercados_id_mercado = {$_POST['mercados_id_mercado']} AND produtos_id_produto = {$_POST['produtos_id_produto']} ") or die($conex->error);
+				if ($res == true) {
+					echo "<script>alert('Preço editado com sucesso!');</script>";
+				} else {
+					echo "<script>alert('ERRO - Não foi editar esse preço!');</script>";
+				}
+				break;
 			case 'excluir':
-				$res = $conex->query("DELETE FROM ofertas WHERE mercados_id_mercado = {$_POST['mercado']} produtos_id_produto = {$_POST['produto']}") or die($conex->error);
+				$res = $conex->query("DELETE FROM ofertas WHERE mercados_id_mercado = {$_GET['mercado']} produtos_id_produto = {$_GET['produto']}") or die($conex->error);
 				if ($res == true) {
 					echo "<script>alert('Excluiu oferta com sucesso!'); location.href='?page=ofertas';</script>";
 				} else {
@@ -33,9 +41,9 @@
 	<table class='table table-hover'>
 		<thead>
 			<tr>
-				<th scope='col' class='fs-5 w-25'>Mercado</th>
 				<th scope='col' class='fs-5 w-25'>Produto</th>
 				<th scope='col' class='fs-5'>Preço</th>
+				<th scope='col' class='fs-5 w-25'>Mercado</th>
 				<th scope='col' class='fs-5 text-center'>Comentário?</th>
 				<th scope='col' class='fs-5 text-center'>Ações</th>
 			</tr>
@@ -46,9 +54,9 @@
 			while ($row = $res->fetch_object()) {
 				echo "
 			<tr>
-				<td><p class='mt-1 mb-0 fs-5'>{$row->nome_mercado}</p></td>
 				<td><p class='mt-1 mb-0 fs-5'>{$row->nome_produto}</p></td>
 				<td><p class='mt-1 mb-0 fs-5'>{$row->preco_oferta}</p></td>
+				<td><p class='mt-1 mb-0 fs-5'>{$row->nome_mercado}</p></td>
 				";
 				if ($row->comentario_oferta == true) {
 					echo "
@@ -73,7 +81,7 @@
 				<td class='text-center'>
 					<button 
 						class='btn btn-success'
-						onclick='location.href='?page=editar_oferta&produto={$row->produtos_id_produto}&mercado={$row->mercados_id_mercado}'
+						onclick='location.href=\"?page=editar_oferta&produto={$row->produtos_id_produto}&mercado={$row->mercados_id_mercado}\"'
 					>
 						Editar
 					</button>

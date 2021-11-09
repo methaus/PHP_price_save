@@ -9,6 +9,9 @@
 			<input type="number" class="form-control" id="qtd" value="1" min="1" name="qtd_produto">
 			<small id="nomeinfo" class="invalid-feedback">Apenas o nome é necessário.</small>
 		</div>
-		<button class="btn btn-success w-50 text-center mt-3">Adicionar à lista</button>
+		<div class="d-flex">
+			<button class="btn btn-success w-50 text-center mt-3 mx-1">Adicionar à lista</button>
+			<a onclick="if (confirm('Abandonar produto?')) location.href='?page=produtos'" class="btn btn-secondary w-50 text-center mt-3 mx-1">Voltar</a>
+		<div>
 	</form>
 </div>
