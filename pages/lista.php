@@ -8,7 +8,7 @@
 			$produtos[] = (array) $row;
 		}
 		echo "
-	<table class='table table-hover'>
+	<table class='table table-hover' id='table_lista_final'>
 		<thead>
 			<tr>
 				<th scope='col' class='fs-5'>Produto</th>
@@ -20,7 +20,7 @@
 		</thead>
 		<tbody>
 		";
-		if (count($produtos) > 0) {
+		if (isset($produtos)) {
 			foreach ($produtos as $row) {
 				$id_produtos[] = $row['id_produto'];
 			}
@@ -83,47 +83,43 @@
 			</tr>
 				";
 			}
-		}
-		echo "
+			echo "
 		</tbody>
 	</table>
+	<script>
+		// font: https://www.codexworld.com/export-html-table-data-to-excel-using-javascript/
+		// acess: 11/11/2021
+		const exportTableToExcel = (tableID) => {
+			let downloadLink;
+			let tableSelected = document.getElementById(tableID);
+			let tableHTML = tableSelected.outerHTML.replace(/ /g, '%20');
+			downloadLink = document.createElement(\"a\");
+			document.body.appendChild(downloadLink);
+			if (navigator.msSaveOrOpenBlob) {
+				var blob = new Blob(['\ufeff', tableHTML], {
+					type: 'application/vnd.ms-excel'
+				});
+				navigator.msSaveOrOpenBlob( blob, 'sua_lista.xls');
+			} else {
+			downloadLink.href = 'data:' + 'application/vnd.ms-excel' + ', ' + tableHTML;
+			downloadLink.download = 'sua_lista.xls';
+			downloadLink.click();
+			}
+		}
+	</script>
+	<div class='text-end'>
+		<button onclick=\"exportTableToExcel('table_lista_final', )\" class='btn btn-success'>Baixar lista</button>
+	</div>
 		";
+		} else {
+			echo "
+			<tr>
+				<td colspan='5'><p class='mt-1 mb-0'>Você não tem nenhum produto cadastrado, para adicionar produtos a lista clique <a href='?page=cadastrar_produto'>aqui</a></p></td>
+			</tr>
+		</tbody>
+	</table>
+			";
+		}
 	?>
 </div>
 
-<!--
-Array ( 
-	[0] => Array (
-		[mercados_id_mercado] => 16
-		[preco_oferta] => 14.89
-		[comentario_oferta] => Eh, pão de batata...
-		[id_mercado] => 16
-		[nome_mercado] => Casa da Mãe Joana Marks
-		[local_mercado] => Puta que te Pariu N° 8
-		[site_mercado] =>
-	)
-	[2] => Array (
-		[mercados_id_mercado] => 17
-		[preco_oferta] => 10.99
-		[comentario_oferta] =>
-		[id_mercado] => 17
-		[nome_mercado] => Rei dos Bolos
-		[local_mercado] => Não sei
-		[site_mercado] => Não ligo
-	)
-	[3] => Array (
-		[id_produto] => 8
-		[nome_produto] => Mel de Abelha Aurora
-		[qtd_produto] => 2
-		[mercados_id_mercado] => 18
-		[produtos_id_produto] => 8
-		[id_oferta] => 0
-		[preco_oferta] => 17.89
-		[comentario_oferta] =>
-		[id_mercado] => 18
-		[nome_mercado] => Tenda do Exu Caveira e Pai Vatapá
-		[local_mercado] =>
-		[site_mercado] => Faz encruzilhada 4° Feira
-	)
-)
--->

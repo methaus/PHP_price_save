@@ -36,6 +36,10 @@
 			define('BASE', 'price_save');
 			$conex = new MySQLi(HOST,USER,PASS,BASE);
 
+			if (!$conex) {
+				die("Erro ao acessar o banco de dados!");
+			}
+
 			switch (@$_GET['page']) {
 				case 'mercados':
 					include('./pages/mercados/mercados.php');
