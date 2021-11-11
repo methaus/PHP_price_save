@@ -6,4 +6,4 @@
 
 ### Credits
  - Javascript table export to excel by CodexWorld, from [codexworld.com](https://www.codexworld.com/export-html-table-data-to-excel-using-javascript/);
- -- Access 11/11/2021.
+ - Access 11/11/2021.
