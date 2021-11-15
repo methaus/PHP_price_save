@@ -23,6 +23,6 @@
 		<div class="d-flex">
 			<button class="btn btn-success w-50 text-center mt-3 mx-1">Editar</button>
 			<a onclick="if (confirm('Abandonar formulário?')) location.href='?page=ofertas'" class="btn btn-secondary w-50 text-center mt-3 mx-1">Voltar</a>
-		<div>
+		</div>
 	</form>
 </div>

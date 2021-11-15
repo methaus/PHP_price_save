@@ -1,8 +1,8 @@
-<?php 
-	$res = $conex->query("SELECT * FROM mercados WHERE id_mercado = {$_GET['id_mercado']}") or die($conn->error);
-	$row = $res->fetch_object();
-?>
 <div class="w-50 container shadow-lg mt-4 pb-3 rounded">
+	<?php 
+		$res = $conex->query("SELECT * FROM mercados WHERE id_mercado = {$_GET['id_mercado']}") or die($conn->error);
+		$row = $res->fetch_object();
+	?>
 	<h1 class="text-center pt-3">Editar local</h1>
 	<form class="form-row mx-auto my-3 px-4" method="POST" action="?page=mercados" onsubmit="return confirm('Confirmar edição?')">
 		<input type="hidden" name="operacao" value="editar">
@@ -25,6 +25,6 @@
 		<div class="d-flex">
 			<button class="btn btn-success w-50 text-center mt-3 mx-1">Editar</button>
 			<a onclick="if (confirm('Abandonar formulário?')) location.href='?page=mercados'" class="btn btn-secondary w-50 text-center mt-3 mx-1">Voltar</a>
-		<div>
+		</div>
 	</form>
 </div>

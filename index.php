@@ -29,53 +29,60 @@
 				</div>
 			</div>
 		</nav>
-		<?php
-			define('HOST', 'localhost');
-			define('USER', 'root');
-			define('PASS', '');
-			define('BASE', 'price_save');
-			$conex = new MySQLi(HOST,USER,PASS,BASE);
+		<div>
+			<?php
+				define('HOST', 'localhost');
+				define('USER', 'root');
+				define('PASS', '');
+				define('BASE', 'price_save');
+				$conex = new MySQLi(HOST,USER,PASS,BASE);
 
-			if (!$conex) {
-				die("Erro ao acessar o banco de dados!");
-			}
+				if (!$conex) {
+					die("Erro ao acessar o banco de dados!");
+				}
 
-			switch (@$_GET['page']) {
-				case 'mercados':
-					include('./pages/mercados/mercados.php');
-					break;
-				case 'cadastrar_mercado':
-					include('./pages/mercados/cadastrar.html');
-					break;
-				case 'editar_mercado':
-					include('./pages/mercados/editar.php');
-					break;
-				case 'produtos':
-					include('./pages/produtos/produtos.php');
-					break;
-				case 'cadastrar_produto':
-					include('./pages/produtos/cadastrar.html');
-					break;
-				case 'editar_produto':
-					include('./pages/produtos/editar.php');
-					break;
-				case 'ofertas':
-					include('./pages/ofertas/ofertas.php');
-					break;
-				case 'cadastrar_ofertas':
-					include('./pages/ofertas/cadastrar.php');
-					break;
-				case 'editar_oferta':
-					include('./pages/ofertas/editar.php');
-					break;
-				case 'lista':
-					include('./pages/lista.php');
-					break;
-				default:
-					include('./pages/home.php');
-					break;
-			}
-		?>
+				switch (@$_GET['page']) {
+					case 'mercados':
+						include('./pages/mercados/mercados.php');
+						break;
+					case 'cadastrar_mercado':
+						include('./pages/mercados/cadastrar.html');
+						break;
+					case 'editar_mercado':
+						include('./pages/mercados/editar.php');
+						break;
+					case 'produtos':
+						include('./pages/produtos/produtos.php');
+						break;
+					case 'cadastrar_produto':
+						include('./pages/produtos/cadastrar.html');
+						break;
+					case 'editar_produto':
+						include('./pages/produtos/editar.php');
+						break;
+					case 'ofertas':
+						include('./pages/ofertas/ofertas.php');
+						break;
+					case 'cadastrar_ofertas':
+						include('./pages/ofertas/cadastrar.php');
+						break;
+					case 'editar_oferta':
+						include('./pages/ofertas/editar.php');
+						break;
+					case 'lista':
+						include('./pages/lista.php');
+						break;
+					default:
+						include('./pages/home.php');
+						break;
+				}
+			?>
+		</div>
+		<footer>
+			<p class="d-flex w-100 justify-content-center align-items-center flex-column text-center text-muted mt-4 mb-2">
+				Copyright &copy; 2021; Matheus Gabriel de Lima || contato: mg01012021@hotmail.com
+			</p>
+		</footer>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	</body>
 </html>
